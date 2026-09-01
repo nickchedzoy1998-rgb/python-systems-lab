@@ -1,0 +1,15 @@
+[project]
+name = "python-systems-lab"
+version = "0.1.0"
+description = "Professional Python, backend engineering, and systems learning lab"
+requires-python = ">=3.12"
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
