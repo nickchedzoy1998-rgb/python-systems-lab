@@ -1,6 +1,4 @@
 from pathlib import Path
 
-def discover_csv_files(directory: Path):
-    folder = Path(directory)
-
-    return list(folder.glob('*.csv'))
+def discover_csv_files(directory: Path) -> list[Path]:
+    return [path for path in directory.glob('*.csv') if path.is_file()]
