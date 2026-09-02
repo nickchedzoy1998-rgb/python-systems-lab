@@ -33,14 +33,5 @@ def test_prove_file_discovery_non_recursive(tmp_path: Path):
     csv_filepath.touch()
 
     discovery_result = discover_csv_files(tmp_path)
-    csv_result_filenames = [csv.name for csv in discovery_result]
 
-    assert csv_filename not in csv_result_filenames
-
-
-
-
-
-
-
-    
+    assert csv_filepath not in discovery_result    
