@@ -1,9 +1,11 @@
 # Next
 
-Write `discover_csv_files(directory: Path)`.
+Tighten the non-recursive discovery test.
 
 Requirements:
-- Return `.csv` files immediately inside `directory`.
-- Do not search recursively.
-- Return `Path` objects.
-- Write the implementation manually.
+- change the test return annotation from `-> bool` to `-> None` (or remove it)
+- assert directly that `csv_filepath` is not in `discovery_result`
+- run `pytest` and make sure all tests pass
+- write the changes manually
+
+Do not change `discover_csv_files()`.
