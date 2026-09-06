@@ -1,11 +1,11 @@
 # Next
 
-Add JSON file discovery test-first.
+Implement `discover_json_files(directory: Path) -> list[Path]` in `src/python_systems_lab/file_discovery.py`.
 
 Requirements:
-- in `tests/test_file_discovery.py`, write one new test for a future `discover_json_files(directory: Path) -> list[Path]`
-- create a mix of files in `tmp_path`, including at least two `.json` files and at least two non-JSON files
-- assert that only the top-level `.json` files are returned
-- do not implement `discover_json_files()` yet
-- run `pytest` and confirm the new test fails for the expected reason
-- write the test manually
+- make the new JSON test pass
+- keep the function non-recursive
+- return only actual files, not directories whose names end in `.json`
+- mirror the existing `discover_csv_files()` behaviour rather than refactoring both functions yet
+- run `pytest` and make sure all tests pass
+- write the implementation manually
