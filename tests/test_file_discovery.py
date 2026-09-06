@@ -3,7 +3,8 @@ from pathlib import Path
 from python_systems_lab.file_discovery import discover_csv_files, discover_json_files
 
 file_names = [
-    'file_1.txt', 'file_2.csv', 'file_3', 'file_4.csv', 'file_5.xlsx', 'file_6.csv', 'file_7.csv', 'file_8.xlsx', 'file_9.csv', 'file_10.pdf'
+    'file_1.txt', 'file_2.csv', 'file_3', 'file_4.csv', 'file_5.xlsx', 'file_6.csv', 'file_7.csv', 'file_8.xlsx', 'file_9.csv', 'file_10.pdf',
+    'file_11.json', 'file_12.json'
     ]
 
 def test_discover_csv_files(tmp_path: Path) -> None:
@@ -34,3 +35,19 @@ def test_prove_file_discovery_non_recursive(tmp_path: Path) -> None:
     discovery_result = discover_csv_files(tmp_path)
 
     assert csv_filepath not in discovery_result
+
+
+def test_discover_json_files(tmp_path: Path) -> None:
+    expected_files = [j for j in file_names if Path(j).suffix == '.json']
+
+    for f in file_names:
+        f_path = tmp_path / f
+
+        f_path.touch()
+
+    result = discover_json_files(tmp_path)
+
+    result_file_names = [f.name for f in result]
+
+    assert set(expected_files) == set(result_file_names)
+
