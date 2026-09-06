@@ -1,11 +1,11 @@
 # Next
 
-Clean up `tests/test_file_discovery.py` without changing behaviour.
+Add JSON file discovery test-first.
 
 Requirements:
-- remove the unused `pytest` import
-- import `discover_csv_files` from `python_systems_lab.file_discovery` rather than through `src`
-- add `-> None` return annotations to both test functions
-- keep the existing test logic unchanged
-- run `pytest` and make sure all tests pass
-- write the changes manually
+- in `tests/test_file_discovery.py`, write one new test for a future `discover_json_files(directory: Path) -> list[Path]`
+- create a mix of files in `tmp_path`, including at least two `.json` files and at least two non-JSON files
+- assert that only the top-level `.json` files are returned
+- do not implement `discover_json_files()` yet
+- run `pytest` and confirm the new test fails for the expected reason
+- write the test manually
