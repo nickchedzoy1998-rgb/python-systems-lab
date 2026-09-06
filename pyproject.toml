@@ -2,7 +2,7 @@
 name = "python-systems-lab"
 version = "0.1.0"
 description = "Professional Python, backend engineering, and systems learning lab"
-requires-python = ">=3.12"
+requires-python = ">=3.11"
 dependencies = []
 
 [project.optional-dependencies]
