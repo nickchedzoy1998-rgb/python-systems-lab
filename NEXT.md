@@ -1,13 +1,12 @@
 # Next
 
-Add one test proving `discover_json_files()` excludes directories whose names end in `.json`.
+Refactor the duplicated CSV/JSON discovery logic without changing behaviour.
 
 Requirements:
-- create a real top-level JSON file in `tmp_path`
-- create a directory in `tmp_path` whose name also ends in `.json`
-- call `discover_json_files(tmp_path)`
-- assert the real JSON file is returned
-- assert the `.json` directory is not returned
-- do not change `discover_json_files()` unless the test reveals a bug
+- identify what is identical between `discover_csv_files()` and `discover_json_files()` and what varies
+- extract the shared logic into one private helper in `file_discovery.py`
+- choose the helper name and parameter names yourself
+- keep `discover_csv_files()` and `discover_json_files()` as the public functions
+- do not change the tests except if needed for import formatting
 - run `pytest` and make sure all tests pass
-- write the test manually
+- write the refactor manually
