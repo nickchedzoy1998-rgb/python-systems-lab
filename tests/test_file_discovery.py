@@ -2,7 +2,7 @@ from pathlib import Path
 from typing import Literal
 import pytest
 
-from python_systems_lab.file_discovery import discover_csv_files, discover_json_files, discover_files
+from python_systems_lab.file_discovery import discover_csv_files, discover_json_files
 
 file_names = [
     'file_1.txt', 'file_2.csv', 'file_3', 'file_4.csv', 'file_5.xlsx', 'file_6.csv', 'file_7.csv', 'file_8.xlsx', 'file_9.csv', 'file_10.pdf',
@@ -74,20 +74,5 @@ def test_exclude_directory_named_json(tmp_path: Path) -> None:
     result_file_names = [f.name for f in result]
 
     assert set(expected_files) == set(result_file_names) and directory_name not in result_file_names
-
-@pytest.mark.parametrize("file_type", list(allowed_file_types))
-def test_discover_files(tmp_path: Path, file_type: 'str') -> None:
-    expected_files = [file for file in file_names if Path(file).suffix == file_type]
-
-    for file in file_names:
-        file_path = tmp_path / file
-        file_path.touch()
-
-    found_files = discover_files(tmp_path, file_type=file_type)
-
-    found_file_names = [file.name for file in found_files]
-
-    assert set(expected_files) == set(found_file_names) and file_type in allowed_file_types
-
 
 

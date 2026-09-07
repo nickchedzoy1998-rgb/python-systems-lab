@@ -1,11 +1,11 @@
 from pathlib import Path
 
 def discover_csv_files(directory: Path) -> list[Path]:
-    return [path for path in directory.glob('*.csv') if path.is_file()]
+    return _discover_files(directory=directory, extension='.csv')
 
 def discover_json_files(directory: Path) -> list[Path]:
-    return [path for path in directory.glob('*.json') if path.is_file()]
+        return _discover_files(directory=directory, extension='.json')
 
-def discover_files(directory: Path, file_type: str) -> list[Path]:
-    return [path for path in directory.glob('*' + file_type) if path.is_file()]
+def _discover_files(directory: Path, extension: str) -> list[Path]:
+    return [path for path in directory.glob(f'*{extension}') if path.is_file()]
     
