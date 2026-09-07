@@ -51,3 +51,16 @@ def test_discover_json_files(tmp_path: Path) -> None:
 
     assert set(expected_files) == set(result_file_names)
 
+
+def test_exclude_directory_named_json(tmp_path: Path) -> None:
+    directory_name = 'folder_.json'
+    json_directory = tmp_path / directory_name
+
+    json_directory.mkdir()
+
+    found_files = discover_json_files(tmp_path)
+
+    found_file_names = [file.name for file in found_files]
+
+    assert directory_name not in found_file_names
+
