@@ -1,12 +1,14 @@
 # Next
 
-Refactor the duplicated CSV/JSON discovery logic without changing behaviour.
+Finish the file-discovery refactor without expanding the public API.
 
 Requirements:
-- identify what is identical between `discover_csv_files()` and `discover_json_files()` and what varies
-- extract the shared logic into one private helper in `file_discovery.py`
-- choose the helper name and parameter names yourself
-- keep `discover_csv_files()` and `discover_json_files()` as the public functions
-- do not change the tests except if needed for import formatting
+- turn the generalized `discover_files()` idea into a private helper (leading underscore)
+- make both `discover_csv_files()` and `discover_json_files()` delegate to that helper
+- remove the new public `discover_files()` API
+- remove the parametrized test and any imports/data added only for testing that public generalized function
+- keep the existing CSV/JSON behaviour tests unchanged
 - run `pytest` and make sure all tests pass
 - write the refactor manually
+
+Before coding, be able to state: what is shared, and what single value varies between CSV and JSON discovery?
