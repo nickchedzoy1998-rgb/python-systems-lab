@@ -1,4 +1,5 @@
 from pathlib import Path
+import pytest
 
 from python_systems_lab.file_discovery import discover_csv_files, discover_json_files
 
@@ -68,5 +69,24 @@ def test_exclude_directory_named_json(tmp_path: Path) -> None:
     result_file_names = [f.name for f in result]
 
     assert set(expected_files) == set(result_file_names) and directory_name not in result_file_names
+
+@pytest.mark.parametrize('extension', ['.csv', '.json'])
+def test_discover_files(tmp_path: Path, extension) -> None:
+
+    for f in file_names:
+        file_path = tmp_path / f
+        file_path.touch()
+    
+    if extension == '.csv':
+        result = discover_csv_files(tmp_path)
+    else:
+        result = discover_json_files(tmp_path)
+
+    expected_file_names = [file for file in file_names if Path(file).suffix == extension]
+
+    result_file_names = [result_file.name for result_file in result]
+
+    assert set(expected_file_names) == set(result_file_names)
+
 
 
