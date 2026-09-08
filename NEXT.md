@@ -1,14 +1,12 @@
 # Next
 
-Extract the repeated mixed-file setup into your own pytest fixture.
+Align the project Python version with the interpreter actually running the tests.
 
 Requirements:
-- create a fixture in `tests/test_file_discovery.py` that creates every entry in `file_names` inside `tmp_path`
-- have the fixture return the populated `tmp_path`
-- annotate the fixture return type as `Path`
-- use the fixture in the parametrized happy-path test and the `.json`-directory exclusion test instead of repeating the file-creation loop
-- keep the non-recursive test independent
-- remove the now-unused `nested_dir_name` and `csv_filename` globals
-- do not change production code
-- run `pytest` and make sure all tests pass
-- write the refactor manually
+- run `python --version` inside the activated virtual environment
+- compare it with `requires-python` in `pyproject.toml`
+- decide whether the project should target Python 3.11 or Python 3.12+
+- make exactly one of these true: either recreate the venv with a compatible Python version, or change `requires-python` to match the intended supported version
+- do not change application code
+- run `pytest` afterwards and make sure all tests still pass
+- be ready to explain what `requires-python` means and why a mismatch matters
