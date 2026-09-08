@@ -1,13 +1,14 @@
 # Next
 
-Refactor the duplicated CSV/JSON happy-path tests using `pytest.mark.parametrize` and a typed callable.
+Extract the repeated mixed-file setup into your own pytest fixture.
 
 Requirements:
-- combine `test_discover_csv_files()` and `test_discover_json_files()` into one parametrized test
-- parameterize over the discovery function and expected extension
-- annotate the discovery-function parameter with `Callable[[Path], list[Path]]`
-- import `Callable` from `collections.abc`
-- keep the non-recursive and `.json`-directory edge-case tests separate
+- create a fixture in `tests/test_file_discovery.py` that creates every entry in `file_names` inside `tmp_path`
+- have the fixture return the populated `tmp_path`
+- annotate the fixture return type as `Path`
+- use the fixture in the parametrized happy-path test and the `.json`-directory exclusion test instead of repeating the file-creation loop
+- keep the non-recursive test independent
+- remove the now-unused `nested_dir_name` and `csv_filename` globals
 - do not change production code
 - run `pytest` and make sure all tests pass
 - write the refactor manually
