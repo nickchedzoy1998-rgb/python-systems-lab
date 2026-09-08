@@ -9,23 +9,20 @@ file_names = [
     'file_11.json', 'file_12.json'
     ]
 
-
-def test_discover_csv_files(tmp_path: Path) -> None:
-    expected_files = [csv_f for csv_f in file_names if Path(csv_f).suffix == '.csv']
-
-    for f in file_names:
-        file = tmp_path / f
-
-        file.touch()
-
-    result = discover_csv_files(tmp_path)
-
-    result_file_names = [f.name for f in result]
-
-    assert set(result_file_names) == set(expected_files)
-
 nested_dir_name = 'sub_folder' 
 csv_filename = 'csv_file_1.csv'
+
+def test_prove_file_discovery_non_recursive(tmp_path: Path) -> None:
+    nested_dir = tmp_path / "sub_folder"
+
+    nested_dir.mkdir()
+
+    nested_csv_file = nested_dir / "csv_file_1.csv"
+    nested_csv_file.touch()
+
+    discovery_result = discover_csv_files(tmp_path)
+
+    assert nested_csv_file not in discovery_result
 
 def test_exclude_directory_named_json(tmp_path: Path) -> None:
     directory_name = 'folder_.json'
@@ -44,7 +41,8 @@ def test_exclude_directory_named_json(tmp_path: Path) -> None:
 
     result_file_names = [f.name for f in result]
 
-    assert set(expected_files) == set(result_file_names) and directory_name not in result_file_names
+    assert set(expected_files) == set(result_file_names)
+    assert directory_name not in result_file_names
 
 @pytest.mark.parametrize(
         'discover_function, extension',
