@@ -9,9 +9,6 @@ file_names = [
     'file_11.json', 'file_12.json'
     ]
 
-nested_dir_name = 'sub_folder' 
-csv_filename = 'csv_file_1.csv'
-
 def test_prove_file_discovery_non_recursive(tmp_path: Path) -> None:
     nested_dir = tmp_path / "sub_folder"
 
@@ -24,20 +21,15 @@ def test_prove_file_discovery_non_recursive(tmp_path: Path) -> None:
 
     assert nested_csv_file not in discovery_result
 
-def test_exclude_directory_named_json(tmp_path: Path) -> None:
+def test_exclude_directory_named_json(populated_directory: Path) -> None:
     directory_name = 'folder_.json'
-    json_directory = tmp_path / directory_name
+    json_directory = populated_directory / directory_name
 
     json_directory.mkdir()
 
     expected_files = [file for file in file_names if Path(file).suffix == '.json']
-    
-    for f in file_names:
-        f_path = tmp_path / f
 
-        f_path.touch()
-
-    result = discover_json_files(tmp_path)
+    result = discover_json_files(populated_directory)
 
     result_file_names = [f.name for f in result]
 
@@ -49,16 +41,21 @@ def test_exclude_directory_named_json(tmp_path: Path) -> None:
         [(discover_csv_files, '.csv'), (discover_json_files, '.json')])
 def test_discover_files(
     discover_function: Callable[[Path], list[Path]], 
-    tmp_path: Path, 
+    populated_directory: Path, 
     extension: str
 ) -> None:
 
     expected_file_names = [file for file in file_names if Path(file).suffix == extension]
-
-    for f in file_names:
-        file_path = tmp_path / f
-        file_path.touch()
     
-    result_file_names = [result_file.name for result_file in discover_function(tmp_path)]
+    result_file_names = [result_file.name for result_file in discover_function(populated_directory)]
 
     assert set(expected_file_names) == set(result_file_names)
+
+@pytest.fixture
+def populated_directory(tmp_path: Path) -> Path:
+    for file in file_names:
+        file_path = tmp_path / file
+
+        file_path.touch()
+
+    return tmp_path
