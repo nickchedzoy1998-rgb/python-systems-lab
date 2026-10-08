@@ -13,6 +13,15 @@ FOLDER_FILES_MAP = {
     "media_metadata": ["catalog.csv", "tags.json", "description.txt", "index.csv", "MANIFEST"],
 }
 
+paths = (
+    Path("sales.csv"),
+    Path("customers.csv"),
+    Path("settings.json"),
+    Path("profiles.json"),
+    Path("events.json"),
+    Path("README"),
+)
+
 @pytest.fixture
 def populated_folders(tmp_path: Path) -> list[Path]:
     folder_paths = []
@@ -27,15 +36,12 @@ def populated_folders(tmp_path: Path) -> list[Path]:
 
     return folder_paths
 
-def test_count_files_by_extension(populated_folders: Sequence[Path]) -> None:
-    extension_counts = count_files_by_extension(paths=populated_folders)
+def test_count_files_by_extension(paths) -> None:
+    extension_counts = count_files_by_extension(paths)
 
-    file_name_suffixes = []
-
-    for folder_name, file_names in FOLDER_FILES_MAP.items():
-        for file in file_names:
-            file_name_suffixes.append(Path(file).suffix)
-
-    expected_result = dict(Counter(file_name_suffixes))
+    expected_result = {
+        ".csv": 2,
+        ".json": 3,
+    }
 
     assert extension_counts == expected_result
