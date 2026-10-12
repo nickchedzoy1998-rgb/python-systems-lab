@@ -13,7 +13,6 @@ paths = (
 )
 
 
-
 def test_count_files_by_extension() -> None:
     extension_counts = count_files_by_extension(paths)
 
@@ -21,5 +20,14 @@ def test_count_files_by_extension() -> None:
         ".csv": 2,
         ".json": 3,
     }
+
+    assert extension_counts == expected_result
+
+
+def test_count_files_by_extension_empty_input() -> None:
+    paths = ()
+    extension_counts = count_files_by_extension(paths)
+
+    expected_result = {}
 
     assert extension_counts == expected_result
