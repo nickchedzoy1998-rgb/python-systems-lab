@@ -1,4 +1,3 @@
-from collections.abc import Sequence
 from pathlib import Path
 import pytest
 from collections import Counter
@@ -36,7 +35,7 @@ def populated_folders(tmp_path: Path) -> list[Path]:
 
     return folder_paths
 
-def test_count_files_by_extension(paths) -> None:
+def test_count_files_by_extension() -> None:
     extension_counts = count_files_by_extension(paths)
 
     expected_result = {
