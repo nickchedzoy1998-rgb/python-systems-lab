@@ -33,11 +33,11 @@ def test_count_files_by_extension_empty_input() -> None:
     assert extension_counts == expected_result
 
 
-def test_count_files_by_extension_generator():
+def test_count_files_by_extension_generator() -> None:
     files = [
-        ('file_1.csv'),
-        ('file_2.csv'),
-        ('file_3.json')
+        'file_1.csv',
+        'file_2.csv',
+        'file_3.json'
     ]
     
     paths = (Path(file) for file in files)
