@@ -31,3 +31,18 @@ def test_count_files_by_extension_empty_input() -> None:
     expected_result = {}
 
     assert extension_counts == expected_result
+
+
+def test_count_files_by_extension_generator():
+    files = [
+        ('file_1.csv'),
+        ('file_2.csv'),
+        ('file_3.json')
+    ]
+    
+    paths = (Path(file) for file in files)
+
+    expected_result = {".csv": 2, ".json": 1}
+
+    assert expected_result == count_files_by_extension(paths)
+
