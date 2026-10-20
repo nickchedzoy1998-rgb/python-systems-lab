@@ -1,16 +1,17 @@
 def sum_numbers(*numbers: int) -> int:
-    if not numbers:
-        return 0
+    result = 0
 
-    return sum(numbers)
+    for num in numbers:
+        result += num
+
+    return result
+
+def show_settings(**kwargs: object) -> None:
+    print(kwargs)
+
+def filter_settings(**settings: object) -> dict[str: object]:
+    return {setting: obj for setting, obj in settings.items() if obj is not None}
+
 
 
 # if __name__ == '__main__':
-#     def sum_numbers(*numbers: int) -> int:
-#         if not numbers:
-#             return 0
-
-#         print(sum(numbers))
-
-#     sum_numbers(1,5,6,7,8,9)
-    
