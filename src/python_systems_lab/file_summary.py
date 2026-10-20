@@ -1,8 +1,8 @@
-from collections.abc import Sequence
+from collections.abc import Iterable
 from pathlib import Path
 from collections import Counter
 
-def count_files_by_extension(paths: Sequence[Path]) -> dict[str, int]:
+def count_files_by_extension(paths: Iterable[Path]) -> dict[str, int]:
 
     suffixes = [path.suffix for path in paths if path.suffix]
 

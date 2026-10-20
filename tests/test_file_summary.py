@@ -23,7 +23,6 @@ def test_count_files_by_extension() -> None:
 
     assert extension_counts == expected_result
 
-
 def test_count_files_by_extension_empty_input() -> None:
     paths = ()
     extension_counts = count_files_by_extension(paths)
@@ -31,7 +30,6 @@ def test_count_files_by_extension_empty_input() -> None:
     expected_result = {}
 
     assert extension_counts == expected_result
-
 
 def test_count_files_by_extension_generator() -> None:
     files = [
@@ -46,3 +44,25 @@ def test_count_files_by_extension_generator() -> None:
 
     assert expected_result == count_files_by_extension(paths)
 
+def test_count_files_by_extension_generator_exhaustion() -> None:
+    files = [
+        'file_1.csv',
+        'file_2.csv',
+        'file_3.json'
+    ]
+
+    def generate_path_obj(files):
+        for file in files:
+            yield Path(file)
+
+    paths = generate_path_obj(files=files)
+
+    first_result = count_files_by_extension(paths=paths)
+    second_result = count_files_by_extension(paths=paths)
+
+    assert first_result == {".csv": 2, ".json": 1} and second_result == {}
+
+
+
+
+    
