@@ -23,3 +23,19 @@ def test_filter_settings() -> None:
         "port": 5432,
         "debug": False,
     }
+
+def test_filter_settings_empty_input() -> None:
+    assert filter_settings() == {}
+
+def test_filter_settings_preserves_falsy_values() -> None:
+        assert filter_settings(
+        host=False,
+        port=0,
+        password="",
+        debug=True,
+    ) == {
+        "host": False,
+        "port": 0,
+        "password": "",
+        "debug": True,
+    }

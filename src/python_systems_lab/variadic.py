@@ -9,9 +9,16 @@ def sum_numbers(*numbers: int) -> int:
 def show_settings(**kwargs: object) -> None:
     print(kwargs)
 
-def filter_settings(**settings: object) -> dict[str: object]:
-    return {setting: obj for setting, obj in settings.items() if obj is not None}
+def filter_settings(**settings: object) -> dict[str, object]:
+    return {setting: value for setting, value in settings.items() if value is not None}
 
 
 
-# if __name__ == '__main__':
+if __name__ == '__main__':
+    settings = {
+        "host": "localhost",
+        "port": 5432,
+    }
+
+    # print(filter_settings(settings))
+    print(filter_settings(**settings))
