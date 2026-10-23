@@ -9,8 +9,8 @@ def get_database_port(
 
     port = config.get('port')
 
-    if isinstance(port, int) and port != True and port != False: 
-        return config['port']
+    if isinstance(port, int) and not isinstance(port, bool): 
+        return port
 
     return default
 
