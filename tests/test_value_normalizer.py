@@ -14,3 +14,6 @@ def test_normalize_value_none() -> None:
 
 def test_normalize_value_true() -> None:
     assert normalize_value(True) == 'True'
+
+def test_normalize_value_false() -> None:
+    assert normalize_value(False) == "False"
