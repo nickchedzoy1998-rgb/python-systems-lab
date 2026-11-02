@@ -43,3 +43,37 @@ def test_boolean_port_false() -> None:
             port=False,
             database="app",
         )
+
+def test_zero_port() -> None:
+    with pytest.raises(ValidationError):
+        DatabaseConfig(
+            host='localhost',
+            port=0,
+            database="app",
+        )
+
+def test_one_port() -> None:
+    config = DatabaseConfig(
+        host='localhost',
+        port=1,
+        database="app",
+    )
+
+    assert config.port == 1
+
+def test_65535_port() -> None:
+    config = DatabaseConfig(
+        host='localhost',
+        port=65535,
+        database="app",
+    )
+
+    assert config.port == 65535
+
+def test_high_port() -> None:
+    with pytest.raises(ValidationError):
+        DatabaseConfig(
+            host='localhost',
+            port=65536,
+            database="app",
+        )
