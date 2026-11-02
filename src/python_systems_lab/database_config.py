@@ -1,4 +1,5 @@
-from typing import TypedDict, Mapping
+from typing import TypedDict
+from collections.abc import Mapping
 
 class DatabaseConfig(TypedDict):
     host: str
@@ -13,7 +14,7 @@ def parse_database_config(
     port = raw.get('port')
     database = raw.get('database')
 
-    if not all(isinstance(key, str) and key != '' for key in (host, database)):
+    if not all(isinstance(key, str) and key.strip() != '' for key in (host, database)):
         raise ValueError("Host and database must be non-empty strings!")
 
     if not isinstance(port, int) or port < 1 or port > 65535:

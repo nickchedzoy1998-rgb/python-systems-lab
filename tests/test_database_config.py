@@ -55,21 +55,23 @@ def test_parse_database_config_blank_database() -> None:
     with pytest.raises(ValueError):
         parse_database_config({
         "host": "localhost",
-        "port": 65536,
+        "port": 65535,
         "database": " "
     })
 
+def test_unmodified_parser() -> None:
+    config = {
+            "host": "localhost",
+            "port": 5432,
+            "database": "app"
+        }
 
-# with pytest.raises(ValueError):
-    
-# Write tests for the following scenarios:
-# Scenario	Expected
-# All three fields valid	Return the validated dictionary
-# host missing	ValueError
-# port is "5432"	ValueError
-# port is True	ValueError
-# port is 0	ValueError
-# port is 65536	ValueError
-# database is "   "	ValueError
+    original_config = config.copy()
 
-# For invalid inputs, use:
+    database_config = parse_database_config(original_config)
+
+    assert original_config is not database_config 
+    assert config == original_config
+
+
+
