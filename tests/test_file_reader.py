@@ -4,30 +4,26 @@ import pytest
 from src.python_systems_lab.file_reader import read_text_file
 
 def test_existing_file(tmp_path: Path) -> None:
+    file_path = tmp_path / 'example_file.txt'
 
-    with tmp_path.open('w', encoding='utf-8') as f:
+    with file_path.open('w', encoding='utf-8') as f:
         content = 'Welcome to my file.'
         f.write(content)
 
-    assert read_text_file(tmp_path) == 'Welcome to my file.'
+    assert read_text_file(file_path) == content
 
-def test_non_existing_path() -> None:
-    tmp_path = Path('My Documents')
+def test_non_existing_path(tmp_path: Path) -> None:
+    file_path = tmp_path / 'example_file.txt'
 
     with pytest.raises(FileNotFoundError):
-        read_text_file(tmp_path)
+        read_text_file(file_path)
 
+def test_file_closed_after_with(tmp_path: Path) -> None:
+    file_path = tmp_path / 'example_file.txt'
 
+    with file_path.open('w', encoding='utf-8') as f:
+        content = 'My File'
+        f.write(content)
+        assert not f.closed
 
-
-
-# Existing file: Use tmp_path to create a UTF-8 file and verify that your function returns its contents exactly.
-# Missing file: Pass a nonexistent path and verify that FileNotFoundError is raised.
-def test_create_utf8_file_with_open(tmp_path):
-    file_path = tmp_path / "example.txt"
-    
-    with file_path.open("w", encoding="utf-8") as f:
-        f.write("Line 1: 🌟\n")
-        f.write("Line 2: ñoñó\n")
-        
-    assert file_path.exists()
+    assert f.closed
