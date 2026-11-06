@@ -1,0 +1,53 @@
+from pathlib import Path
+import csv
+import pytest
+
+from python_systems_lab.reliable_data_pipeline.csv_reader import read_csv
+
+def test_read_csv(tmp_path: Path) -> None:
+    file_path = tmp_path / 'TestFile.csv'
+
+    data = [
+        {"customer_id": "C1", "amount": "12.50"},
+        {"customer_id": "C2", "amount": "9.00"}
+    ]
+
+    headers = [key for key in data[0].keys()]
+
+    with file_path.open(mode='w', encoding='utf-8', newline="") as f:
+        writer = csv.DictWriter(f, fieldnames=headers)
+        writer.writeheader()
+        writer.writerows(data)
+
+    assert read_csv(file_path) == data
+
+def test_read_non_existent_csv(tmp_path: Path) -> None:
+    file_path = tmp_path / 'TestFile.csv'
+
+    with pytest.raises(FileNotFoundError):
+        read_csv(file_path)
+
+def test_read_csv_field_has_quoted_comma(tmp_path: Path) -> None:
+    file_path = tmp_path / 'TestFile.csv'
+
+    data = [
+        {"customer_id": "C1", "amount": "12.50"},
+        {"customer_id": "C2", "amount": "9.00"},
+        {"customer_id": "C3, C4", "amount": "9,00"},
+    ]
+
+    headers = [key for key in data[0].keys()]
+
+    with file_path.open(mode='w', encoding='utf-8', newline="") as f:
+        writer = csv.DictWriter(f, headers)
+        writer.writeheader()
+        writer.writerows(data)
+
+    rows = read_csv(file_path)
+
+    assert rows[2]['customer_id'] == "C3, C4"
+    assert rows[2]['amount'] == "9,00"
+
+
+
+
