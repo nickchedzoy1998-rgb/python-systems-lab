@@ -1,16 +1,9 @@
 # Next
 
-Add a small typed file-summary function using `Sequence`.
+## P01 · Reliable Data Pipeline · 1A Tested ingestion CLI
 
-Implement `count_files_by_extension(paths: Sequence[Path]) -> dict[str, int]` in a new `src/python_systems_lab/file_summary.py` module.
+**One ten-minute task:** Propose a name and typed signature for the function that will read one CSV file. Explain what the path argument represents, how the header and string-valued fields map to the returned rows, and what the caller observes if the file is missing.
 
-Requirements:
-- write the test first in `tests/test_file_summary.py`
-- make the test pass a tuple of `Path` objects, not a list
-- include repeated `.csv` and `.json` suffixes plus one path with no suffix
-- expect suffixes such as `.csv` and `.json` to map to their counts
-- ignore paths with no suffix
-- import `Sequence` from `collections.abc`
-- do not mutate the input
-- run the test once before implementation to see the expected red state, then implement manually and run `pytest` again
-- be ready to explain why `Sequence[Path]` is a more flexible input type here than `list[Path]`
+Use the standard library (`pathlib.Path` and `csv.DictReader`). For this first slice, assume well-formed input with a header and a fixed number of fields per row. Return a list of row dictionaries and allow `FileNotFoundError` to propagate. Write the proposed signature and explanation for review before implementing the reader.
+
+This is the file-source slice of the ingestion module. The CLI, validation, deterministic output and failure tests are later acceptance work for 1A.
