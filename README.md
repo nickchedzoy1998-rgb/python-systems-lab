@@ -42,6 +42,6 @@ does not replace the current task.
 
 ## Current focus
 
-Professional Python fundamentals.
+The first major project is the Reliable Data Pipeline. Start with a tested local ingestion command, then add atomic PostgreSQL batches and safe replay. A separate job API can reuse the database setup while owning its own job and attempt state. The [Engineering Lab project roadmap](https://engineering-lab-nick.nickchedzoypt797242.chatgpt.site/#Projects) shows how analytics and operations build on these components.
 
 See `NEXT.md`.
