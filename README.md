@@ -32,6 +32,14 @@ AI is used primarily for:
 The objective is understanding and engineering fluency rather than
 maximising implementation speed.
 
+## Curriculum practice rules
+
+[SQL practice: capability with minimal overhead](docs/SQL_PRACTICE.md)
+adds diagnostic-led SQL practice within existing ten-minute sessions.
+Project work and delayed reviews count; familiar material is not retaught
+without evidence of a gap. This supplements the broader curriculum and
+does not replace the current task.
+
 ## Current focus
 
 Professional Python fundamentals.
