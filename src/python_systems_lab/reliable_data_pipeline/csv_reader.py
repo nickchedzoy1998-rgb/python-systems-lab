@@ -4,25 +4,39 @@ import csv
 import logging
 from decimal import Decimal, InvalidOperation
 
+def read_csv(path: Path) -> list[dict[str, str]]:
+    with path.open(mode='r', encoding='utf-8', newline="") as f:
+        reader = csv.DictReader(f)
+
+        return [row for row in reader]
+    
 def csv_writer(folder_name: str, file_name: str, data: list[dict[str, str]]) -> None:
+    if not data:
+        return
+    
     folder_path = Path(folder_name)
 
     if not folder_path.exists():
         folder_path.mkdir(parents=True, exist_ok=True)
 
     file_path = folder_path / file_name
+    
     headers = [key for key in data[0].keys()]
 
-    with file_path.open(mode='w', encoding='utf-8', newline="") as f:
-        writer = csv.DictWriter(f, headers)
-        writer.writeheader()
-        writer.writerows(data)
+    if not file_path.exists():
+        with file_path.open(mode='w', encoding='utf-8', newline="") as f:
+            writer = csv.DictWriter(f, fieldnames=headers)
+            writer.writeheader()
+            writer.writerows(data)
 
-def read_csv(path: Path) -> list[dict[str, str]]:
-    with path.open(mode='r', encoding='utf-8', newline="") as f:
-        reader = csv.DictReader(f)
+    else:
+        existing_rows = read_csv(file_path)
+        rows_to_write = [r for r in data if r not in existing_rows]
 
-        return [row for row in reader]
+        if rows_to_write:
+            with file_path.open(mode='a', encoding='utf-8', newline="") as f:
+                writer = csv.DictWriter(f, fieldnames=headers)
+                writer.writerows(rows_to_write)
 
 def validate_csv_row(row: dict) -> None:
     customer_id = row.get('customer_id', None)

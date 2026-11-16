@@ -21,8 +21,9 @@ if __name__ == '__main__':
     {"customer_id": "C1", "amount": "12.50"},
     {"customer_id": "C2", "amount": "9.00"},
     {"customer_id": "C3", "amount": "15.75"},
+    {"customer_id": "C4", "amount": "15.05"},
 ]
 
     csv_writer(folder_name='Test Files', file_name='transactions.csv', data=transactions_data)    
 
-    print(main())
+    # print(main())
