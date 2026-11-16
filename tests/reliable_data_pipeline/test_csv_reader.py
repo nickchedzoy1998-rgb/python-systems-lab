@@ -51,7 +51,7 @@ def test_read_csv_field_has_quoted_comma(tmp_path: Path) -> None:
 def test_validate_csv_row_accepts_valid_amount() -> None:
     row = {"customer_id": "C1", "amount": "12.50"}
 
-    assert validate_csv_row(row=row) == None
+    assert validate_csv_row(row=row) is None
 
 def test_validate_csv_row_rejects_negative_amount() -> None:
     row = {"customer_id": "C1", "amount": "-5.00"}
@@ -59,6 +59,9 @@ def test_validate_csv_row_rejects_negative_amount() -> None:
     with pytest.raises(ValueError):
         validate_csv_row(row=row)
 
+def test_validate_csv_row_rejects_invalid_amount() -> None:
+    row = {"customer_id": "C1", "amount": "abc"}
 
-
+    with pytest.raises(ValueError, match='Amount must be a valid decimal number'):
+        validate_csv_row(row=row) 
 
