@@ -4,6 +4,19 @@ import csv
 import logging
 from decimal import Decimal, InvalidOperation
 
+def csv_writer(folder_name: str, file_name: str, data: list[dict[str, str]]) -> None:
+    folder_path = Path(folder_name)
+
+    if not folder_path.exists():
+        folder_path.mkdir(parents=True, exist_ok=True)
+
+    file_path = folder_path / file_name
+    headers = [key for key in data[0].keys()]
+
+    with file_path.open(mode='w', encoding='utf-8', newline="") as f:
+        writer = csv.DictWriter(f, headers)
+        writer.writeheader()
+        writer.writerows(data)
 
 def read_csv(path: Path) -> list[dict[str, str]]:
     with path.open(mode='r', encoding='utf-8', newline="") as f:
@@ -35,3 +48,12 @@ def validate_csv_row(row: dict) -> None:
     if converted_amount < 0:
         raise ValueError('Amount must be non negative')
 
+def load_validated_csv(path: Path) -> list[dict[str, str]]:
+    read_rows = read_csv(path=path)
+
+    for row in read_rows:
+        validate_csv_row(row=row)
+
+    return read_rows
+
+    

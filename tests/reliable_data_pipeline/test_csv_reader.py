@@ -2,7 +2,7 @@ from pathlib import Path
 import csv
 import pytest
 
-from python_systems_lab.reliable_data_pipeline.csv_reader import read_csv, validate_csv_row
+from python_systems_lab.reliable_data_pipeline.csv_reader import read_csv, validate_csv_row, load_validated_csv
 
 def test_read_csv(tmp_path: Path) -> None:
     file_path = tmp_path / 'TestFile.csv'
@@ -63,5 +63,25 @@ def test_validate_csv_row_rejects_invalid_amount() -> None:
     row = {"customer_id": "C1", "amount": "abc"}
 
     with pytest.raises(ValueError, match='Amount must be a valid decimal number'):
-        validate_csv_row(row=row) 
+        validate_csv_row(row=row)
+
+def test_load_validated_csv_rejects_invalid_row(tmp_path: Path) -> None:
+    data = [
+        {"customer_id": "C1", "amount": "12.50"},
+        {"customer_id": "C2", "amount": "abc"},
+        {"customer_id": "C3", "amount": "9.00"},
+    ]
+    headers = ['customer_id', 'amount']
+
+    file_path = tmp_path / 'Test_File_Path.csv'
+
+    with file_path.open(mode='w', encoding='utf-8', newline="") as f:
+        writer = csv.DictWriter(f, headers)
+        writer.writeheader()
+        writer.writerows(data)
+
+    with pytest.raises(ValueError):
+        load_validated_csv(file_path)
+
+
 
