@@ -34,3 +34,4 @@ def validate_csv_row(row: dict) -> None:
 
     if converted_amount < 0:
         raise ValueError('Amount must be non negative')
+

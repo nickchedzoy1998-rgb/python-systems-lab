@@ -2,7 +2,7 @@ from pathlib import Path
 import csv
 import pytest
 
-from python_systems_lab.reliable_data_pipeline.csv_reader import read_csv
+from python_systems_lab.reliable_data_pipeline.csv_reader import read_csv, validate_csv_row
 
 def test_read_csv(tmp_path: Path) -> None:
     file_path = tmp_path / 'TestFile.csv'
@@ -47,6 +47,17 @@ def test_read_csv_field_has_quoted_comma(tmp_path: Path) -> None:
 
     assert rows[2]['customer_id'] == "C3, C4"
     assert rows[2]['amount'] == "9,00"
+
+def test_validate_csv_row_accepts_valid_amount() -> None:
+    row = {"customer_id": "C1", "amount": "12.50"}
+
+    assert validate_csv_row(row=row) == None
+
+def test_validate_csv_row_rejects_negative_amount() -> None:
+    row = {"customer_id": "C1", "amount": "-5.00"}
+
+    with pytest.raises(ValueError):
+        validate_csv_row(row=row)
 
 
 
