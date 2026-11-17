@@ -2,7 +2,7 @@ import pytest
 from pydantic import ValidationError
 import json
 
-from src.python_systems_lab.pydantic_config import DatabaseConfig
+from python_systems_lab.exercises.pydantic_config import DatabaseConfig
 
 def test_valid_integer() -> None:
     config = DatabaseConfig(

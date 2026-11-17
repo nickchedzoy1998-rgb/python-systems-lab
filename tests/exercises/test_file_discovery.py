@@ -2,7 +2,7 @@ from collections.abc import Callable
 from pathlib import Path
 import pytest
 
-from python_systems_lab.file_discovery import discover_csv_files, discover_json_files
+from python_systems_lab.exercises.file_discovery import discover_csv_files, discover_json_files
 
 file_names = [
     'file_1.txt', 'file_2.csv', 'file_3', 'file_4.csv', 'file_5.xlsx', 'file_6.csv', 'file_7.csv', 'file_8.xlsx', 'file_9.csv', 'file_10.pdf',

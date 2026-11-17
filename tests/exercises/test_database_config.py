@@ -1,6 +1,6 @@
 import pytest
 
-from src.python_systems_lab.database_config import parse_database_config
+from python_systems_lab.exercises.database_config import parse_database_config
 
 def test_parse_database_config() -> None:
     assert parse_database_config({

@@ -1,7 +1,7 @@
 from pathlib import Path
 import pytest
 
-from src.python_systems_lab.file_reader import read_text_file
+from python_systems_lab.exercises.file_reader import read_text_file
 
 def test_existing_file(tmp_path: Path) -> None:
     file_path = tmp_path / 'example_file.txt'

@@ -1,4 +1,4 @@
-from src.python_systems_lab.variadic import sum_numbers, filter_settings
+from python_systems_lab.exercises.variadic import sum_numbers, filter_settings
 
 def test_sum_numbers_with_two_integers() -> None:
     assert sum_numbers(2,3) == 5

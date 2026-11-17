@@ -2,7 +2,7 @@ from argparse import ArgumentParser
 from pathlib import Path
 import sys
 
-from python_systems_lab.reliable_data_pipeline.csv_reader import csv_writer, load_validated_csv
+from python_systems_lab.guided_integrations.csv_cli.csv_reader import load_validated_csv
 
 def main() -> str:
     parser = ArgumentParser(description='Process csv with CLI')

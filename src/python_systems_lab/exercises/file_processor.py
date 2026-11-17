@@ -1,7 +1,7 @@
 from pathlib import Path
 import logging
 
-from src.python_systems_lab.file_reader import read_text_file
+from python_systems_lab.exercises.file_reader import read_text_file
 
 logger = logging.getLogger(__name__)
 

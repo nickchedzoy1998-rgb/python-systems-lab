@@ -2,7 +2,7 @@ from pathlib import Path
 import pytest
 import logging
 
-from src.python_systems_lab.file_processor import process_text_file
+from python_systems_lab.exercises.file_processor import process_text_file
 
 def test_successful_processor(tmp_path: Path) -> None:
     file_path = tmp_path / 'HelloWorld.txt'

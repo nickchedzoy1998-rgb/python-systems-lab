@@ -50,18 +50,31 @@ after its required concepts have already been introduced and practised.
 During a project, the learner chooses the structure, responsibilities and
 tests instead of receiving a function-by-function tutorial.
 
+## Repository structure
+
+- `src/python_systems_lab/exercises/` contains focused concept practice.
+- `src/python_systems_lab/guided_integrations/` contains instructor-supported
+  combinations of previously introduced mechanisms.
+- `examples/` contains manual inputs used to exercise guided programs.
+- `tests/` mirrors the learning mode and package structure.
+- `docs/practice/` contains supporting practice policies.
+
+Independent project packages will be introduced only when their readiness
+gate has been passed and the project is deliberately activated. The repository
+does not create placeholder project code in advance.
+
 ## Curriculum practice rules
 
-[SQL practice: capability with minimal overhead](docs/SQL_PRACTICE.md)
+[SQL practice: capability with minimal overhead](docs/practice/SQL_PRACTICE.md)
 adds diagnostic-led SQL practice within existing ten-minute sessions.
 Project work and delayed reviews count; familiar material is not retaught
 without evidence of a gap.
 
 ## Current focus
 
-The `reliable_data_pipeline` CSV reader, validation and CLI package is a
-**guided integration build** for professional Python, testing and process
-boundaries. It is not the first major project.
+The `guided_integrations/csv_cli` package is a **guided integration build**
+for professional Python, testing and process boundaries. It is not the first
+major project.
 
 After the remaining CLI/process-testing lessons and a short mixed readiness
 check, **P01 · Reliable Data Pipeline** begins as a fresh bounded program

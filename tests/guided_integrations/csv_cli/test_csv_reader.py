@@ -2,7 +2,7 @@ from pathlib import Path
 import csv
 import pytest
 
-from python_systems_lab.reliable_data_pipeline.csv_reader import read_csv, validate_csv_row, load_validated_csv
+from python_systems_lab.guided_integrations.csv_cli.csv_reader import read_csv, validate_csv_row, load_validated_csv
 
 def test_read_csv(tmp_path: Path) -> None:
     file_path = tmp_path / 'TestFile.csv'

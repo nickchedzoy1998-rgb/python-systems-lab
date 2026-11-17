@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from src.python_systems_lab.file_summary import count_files_by_extension
+from python_systems_lab.exercises.file_summary import count_files_by_extension
 
 
 paths = (

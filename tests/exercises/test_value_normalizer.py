@@ -1,4 +1,4 @@
-from src.python_systems_lab.value_normalizer import normalize_value
+from python_systems_lab.exercises.value_normalizer import normalize_value
 
 def test_normalize_value_int() -> None:
     assert normalize_value(42) == '42'

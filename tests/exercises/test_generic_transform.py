@@ -1,4 +1,4 @@
-from src.python_systems_lab.generic_transform import transform_items
+from python_systems_lab.exercises.generic_transform import transform_items
 
 # Helper Functions:
 def convert_int_to_str(num: int) -> str:

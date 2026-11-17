@@ -1,6 +1,6 @@
 from collections.abc import Iterator
 
-from src.python_systems_lab.transform import transform_numbers
+from python_systems_lab.exercises.transform import transform_numbers
 
 def double(number: int) -> int:
     return number * 2
