@@ -1,9 +1,24 @@
 # Next
 
-## P01 · Reliable Data Pipeline · 1A Tested ingestion CLI
+## Guided learning · CLI process testing
 
-**One ten-minute task:** Propose a name and typed signature for the function that will read one CSV file. Explain what the path argument represents, how the header and string-valued fields map to the returned rows, and what the caller observes if the file is missing.
+The current `reliable_data_pipeline` package is a guided integration build. It is helping practise file handling, validation, testing, CLI arguments, stdout, stderr and exit codes. It is **not P01 project progress**.
 
-Use the standard library (`pathlib.Path` and `csv.DictReader`). For this first slice, assume well-formed input with a header and a fixed number of fields per row. Return a list of row dictionaries and allow `FileNotFoundError` to propagate. Write the proposed signature and explanation for review before implementing the reader.
+**One ten-minute task:** create `tests/reliable_data_pipeline/test_cli.py` and add a test function named `test_cli_rejects_invalid_csv`.
 
-This is the file-source slice of the ingestion module. The CLI, validation, deterministic output and failure tests are later acceptance work for 1A.
+Inside the test, use `subprocess.run()` to execute the CLI against the existing invalid CSV. Pass the command as a list, use `sys.executable`, `capture_output=True` and `text=True`.
+
+For this task, print only:
+
+- `result.returncode`
+- `result.stderr`
+
+Run:
+
+```bash
+pytest -s tests/reliable_data_pipeline/test_cli.py
+```
+
+**Done when:** the test run shows exit code `1` and the validation message in stderr. Stop before adding assertions; the purpose of this slice is to observe the child-process boundary first.
+
+After the remaining CLI/process-testing lessons and a short mixed readiness check, P01 will begin as a separate program built from a written specification.
