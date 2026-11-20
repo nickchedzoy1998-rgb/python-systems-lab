@@ -24,3 +24,7 @@ if __name__ == '__main__':
     except ValueError as e:
         print(e, file=sys.stderr)
         raise SystemExit(1)
+
+    
+
+# python -m python_systems_lab.guided_integrations.csv_cli.cli TestFiles/transactions.csv

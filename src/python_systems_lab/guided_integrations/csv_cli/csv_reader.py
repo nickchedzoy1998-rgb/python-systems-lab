@@ -70,4 +70,20 @@ def load_validated_csv(path: Path) -> list[dict[str, str]]:
 
     return read_rows
 
-    
+if __name__ == '__main__':
+    trasactions_data = [
+        {"customer_id": "C1", "amount": "12.50"},
+        {"customer_id": "C2", "amount": "9.00"},
+        {"customer_id": "C3", "amount": "14.80"}, 
+    ]
+
+    csv_data = [
+        {"customer_id": "C1", "amount": "12.50"},
+        {"customer_id": "C2", "amount": "9.00"},
+        {"customer_id": "C3", "amount": "not_a_number"}, 
+    ]
+
+    folder_name = 'TestFiles'
+
+    csv_writer(folder_name=folder_name, file_name='transactions.csv', data=trasactions_data)
+    csv_writer(folder_name=folder_name, file_name='test_file.csv', data=csv_data)
